@@ -1,0 +1,742 @@
+{
+  "5": {
+    "inputs": {
+      "sampler_name": "res_2s"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect (前半 / res_2s ※RES4LYF)"
+    }
+  },
+  "6": {
+    "inputs": {
+      "cfg": 3.5,
+      "model": [
+        "18",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG Guider (前半 / high CFG)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "noise_seed": 944590222526077
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "8": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 25,
+      "denoise": 1,
+      "model": [
+        "18",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler"
+    }
+  },
+  "9": {
+    "inputs": {
+      "step": 10,
+      "sigmas": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SplitSigmas",
+    "_meta": {
+      "title": "SplitSigmas"
+    }
+  },
+  "10": {
+    "inputs": {
+      "noise": [
+        "7",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "5",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "94",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "Stage 1: steps 1-10 (res_2s, CFG 3.5)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect (後半 / euler)"
+    }
+  },
+  "12": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "18",
+        0
+      ],
+      "positive": [
+        "24",
+        0
+      ],
+      "negative": [
+        "24",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG Guider (後半 / CFG 1)"
+    }
+  },
+  "13": {
+    "inputs": {},
+    "class_type": "DisableNoise",
+    "_meta": {
+      "title": "DisableNoise"
+    }
+  },
+  "14": {
+    "inputs": {
+      "noise": [
+        "13",
+        0
+      ],
+      "guider": [
+        "12",
+        0
+      ],
+      "sampler": [
+        "11",
+        0
+      ],
+      "sigmas": [
+        "9",
+        1
+      ],
+      "latent_image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "Stage 2: steps 11-25 (euler, CFG 1)"
+    }
+  },
+  "16": {
+    "inputs": {
+      "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "QIE21_model"
+    }
+  },
+  "17": {
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "18": {
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "QwenImage21Cache",
+    "_meta": {
+      "title": "Qwen Image 2.1 Cache"
+    }
+  },
+  "19": {
+    "inputs": {
+      "vae_name": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "23": {
+    "inputs": {
+      "width": [
+        "29",
+        0
+      ],
+      "height": [
+        "29",
+        1
+      ],
+      "batch_size": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "OutputImageSize"
+    }
+  },
+  "24": {
+    "inputs": {
+      "prompt": [
+        "78",
+        0
+      ],
+      "negative_prompt": "blur, blurry background, bokeh, out of focus, shallow depth of field\ntwisted joints, duplicated limbs.",
+      "resolution": 1024,
+      "clip": [
+        "17",
+        0
+      ],
+      "images.image_1": [
+        "81",
+        0
+      ],
+      "vae": [
+        "19",
+        0
+      ],
+      "images.image_2": [
+        "82",
+        0
+      ],
+      "images.image_3": [
+        "83",
+        0
+      ],
+      "images.image_4": [
+        "84",
+        0
+      ],
+      "images.image_5": [
+        "85",
+        0
+      ],
+      "images.image_6": [
+        "86",
+        0
+      ],
+      "images.image_7": [
+        "87",
+        0
+      ],
+      "images.image_8": [
+        "88",
+        0
+      ],
+      "images.image_9": [
+        "89",
+        0
+      ],
+      "images.image_10": [
+        "90",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImage21",
+    "_meta": {
+      "title": "TextEncodeQI21"
+    }
+  },
+  "25": {
+    "inputs": {
+      "samples": [
+        "14",
+        1
+      ],
+      "vae": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "26": {
+    "inputs": {
+      "filename_prefix": "QI21_Ref2I/image",
+      "format": "png",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB",
+      "images": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "SaveImageAdvanced",
+    "_meta": {
+      "title": "Save Image (Advanced)"
+    }
+  },
+  "29": {
+    "inputs": {
+      "aspect_ratio": "9:16 (Portrait Widescreen)",
+      "megapixels": 1,
+      "multiple": 32
+    },
+    "class_type": "ResolutionSelector",
+    "_meta": {
+      "title": "Resolution Selector"
+    }
+  },
+  "31": {
+    "inputs": {
+      "clip_name": "qwen3.5_9b_qwen_image_2.1_pe_i2i.int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "33": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "34": {
+    "inputs": {
+      "prompt": [
+        "33",
+        0
+      ],
+      "temperature": 1,
+      "top_p": 0.95,
+      "presence_penalty": 0,
+      "max_length": 24000,
+      "seed": 3767377046,
+      "clip": [
+        "31",
+        0
+      ],
+      "image_1": [
+        "81",
+        0
+      ],
+      "image_2": [
+        "82",
+        0
+      ],
+      "image_3": [
+        "83",
+        0
+      ],
+      "image_4": [
+        "84",
+        0
+      ],
+      "image_5": [
+        "85",
+        0
+      ],
+      "image_6": [
+        "86",
+        0
+      ],
+      "image_7": [
+        "87",
+        0
+      ],
+      "image_8": [
+        "88",
+        0
+      ],
+      "image_9": [
+        "89",
+        0
+      ],
+      "image_10": [
+        "90",
+        0
+      ]
+    },
+    "class_type": "QwenImage21_EditPromptRewrite",
+    "_meta": {
+      "title": "Qwen Image 2.1 — Edit Prompt Rewrite"
+    }
+  },
+  "39": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image1"
+    }
+  },
+  "40": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image2"
+    }
+  },
+  "41": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image3"
+    }
+  },
+  "42": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image4"
+    }
+  },
+  "47": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image5"
+    }
+  },
+  "56": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "Int-🔬",
+    "_meta": {
+      "title": "batch"
+    }
+  },
+  "57": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image6"
+    }
+  },
+  "58": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image7"
+    }
+  },
+  "59": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image8"
+    }
+  },
+  "60": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image9"
+    }
+  },
+  "61": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "image10"
+    }
+  },
+  "72": {
+    "inputs": {
+      "node_id": 74,
+      "widget_name": "value",
+      "signal": [
+        "78",
+        0
+      ],
+      "string_value": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImpactSetWidgetValue",
+    "_meta": {
+      "title": "Set Widget Value"
+    }
+  },
+  "74": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Raw Prompt"
+    }
+  },
+  "76": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Use PE"
+    }
+  },
+  "78": {
+    "inputs": {
+      "switch": [
+        "76",
+        0
+      ],
+      "on_false": [
+        "74",
+        0
+      ],
+      "on_true": [
+        "34",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "If/Else Switch"
+    }
+  },
+  "81": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image1"
+    }
+  },
+  "82": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image2"
+    }
+  },
+  "83": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image3"
+    }
+  },
+  "84": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image4"
+    }
+  },
+  "85": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image5"
+    }
+  },
+  "86": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image6"
+    }
+  },
+  "87": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image7"
+    }
+  },
+  "88": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "59",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image8"
+    }
+  },
+  "89": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image9"
+    }
+  },
+  "90": {
+    "inputs": {
+      "switch": true,
+      "on_true": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Use image10"
+    }
+  },
+  "93": {
+    "inputs": {
+      "pixels": [
+        "81",
+        0
+      ],
+      "vae": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "94": {
+    "inputs": {
+      "switch": [
+        "95",
+        0
+      ],
+      "on_false": [
+        "23",
+        0
+      ],
+      "on_true": [
+        "93",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "If/Else Switch"
+    }
+  },
+  "95": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Edit image1"
+    }
+  }
+}

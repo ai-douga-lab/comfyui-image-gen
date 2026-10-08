@@ -1,0 +1,22 @@
+{
+  "name": "lms-plugin-comfyui-image-gen",
+  "version": "0.1.0",
+  "description": "LM Studio plugin: generate and edit images with Qwen Image 2.1 on local ComfyUI from a local VL model chat.",
+  "repository": "github:ai-douga-lab/comfyui-image-gen",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lms dev",
+    "push": "lms push"
+  },
+  "author": "AI-Douga,Lab",
+  "license": "MIT",
+  "dependencies": {
+    "@lmstudio/sdk": "1.4.0",
+    "jimp": "^1.6.1",
+    "openai": "^5.2.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.8"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "plugin",
+  "runner": "node",
+  "owner": "ai-douga-lab",
+  "name": "comfyui-image-gen",
+  "revision": 9
+}
